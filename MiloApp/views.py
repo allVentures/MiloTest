@@ -94,3 +94,59 @@ class AddNewUser(View):
         else:
             ctx = {"form": form}
             return render(request, "add_new_person.html", ctx)
+
+
+class ModifyUser(View):
+    def get(self, request, id):
+        person_to_modify = User.objects.get(pk=id)
+
+        form = RegisterForm(initial={"username": person_to_modify.username,
+                                     "first_name": person_to_modify.first_name,
+                                     "last_name": person_to_modify.last_name,
+                                     "email": person_to_modify.email,
+                                     })
+        ctx = {"form": form, "modify_user": person_to_modify}
+        return render(request, "modify_person.html", ctx)
+
+    def post(self, request, id):
+        form = RegisterForm(request.POST)
+        person_to_modify = User.objects.get(pk=id)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            password_check = form.cleaned_data["password_check"]
+            birthdate = request.POST.get("birthdate")
+            if birthdate == "":
+                birthdate = None
+
+            errors = {}
+            if password != password_check:
+                errors["password"] = "The passwords dont match, please try again!"
+                ctx = {"form": form, "errors": errors, "modify_user": person_to_modify}
+                return render(request, "modify_person.html", ctx)
+
+            try:
+                person_to_modify.username=username
+                person_to_modify.first_name=first_name
+                person_to_modify.last_name=last_name
+                person_to_modify.email=email
+                person_to_modify.password=password
+                person_to_modify.birthdate=birthdate
+                person_to_modify.save()
+
+            except IntegrityError:
+                errors["username"] = "This username is already taken, choose a different one!"
+            if errors:
+                ctx = {"form": form, "errors": errors, "modify_user": person_to_modify}
+                return render(request, "modify_person.html", ctx)
+
+            msg = "User Updated!"
+            ctx = {"form": form, "msg": msg}
+            return render(request, "modify_person.html", ctx)
+
+        else:
+            ctx = {"form": form, "modify_user": person_to_modify}
+            return render(request, "modify_person.html", ctx)

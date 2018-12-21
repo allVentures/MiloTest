@@ -18,13 +18,14 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path
-from MiloApp.views import MainPage, ShowUserDetails, DeleteUser, AddNewUser
+from MiloApp.views import MainPage, ShowUserDetails, DeleteUser, AddNewUser, ModifyUser
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', MainPage.as_view(), name="main_page"),
     re_path(r'^show_person_details/(?P<id>[0-9]+)$', ShowUserDetails.as_view()),
     re_path(r'^delete_person/(?P<id>[0-9]+)$', DeleteUser.as_view()),
+    re_path(r'^modify/(?P<id>[0-9]+)$', ModifyUser.as_view()),
     re_path('new', AddNewUser.as_view()),
 
 ]

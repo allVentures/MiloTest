@@ -11,8 +11,7 @@ class RegisterForm(forms.Form):
                                  widget=forms.TextInput(attrs={"class": "form-control"}))
     last_name = forms.CharField(label="Last Name", max_length=32, required=False,
                                 widget=forms.TextInput(attrs={"class": "form-control"}))
-    email = forms.EmailField(label="email", widget=forms.EmailInput(attrs={"class": "form-control"}), max_length=64)
+    email = forms.EmailField(label="email", widget=forms.EmailInput(attrs={"class": "form-control"}), max_length=64, )
 
     # I will generate the birthdate manually with HTML as I wanna use the HTML calendar widget
     # birthdate = forms.DateField(label="birthdate", widget=forms.D(attrs={"class": "form-control"}))
-
