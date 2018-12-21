@@ -31,7 +31,17 @@
                     {% endif %}
                 </td>
                 <td class="centerTableCol">{{ user.random_number }}</td>
-                <td class="centerTableCol"></td>
+                <td class="centerTableCol">
+                    {% if user.bizz == 3 %}
+                        Bizz
+                    {% elif user.bizz == 5 %}
+                        Fuzz
+                    {% elif user.bizz == 53 %}
+                        BizzFuzz
+                    {% else %}
+                        {{ user.random_number }}
+                    {% endif %}
+                </td>
                 <td class="centerTableCol">
                     <a href="/modify/{{ user.id }}">
                         <button class="btn btn-warning">Modify</button>

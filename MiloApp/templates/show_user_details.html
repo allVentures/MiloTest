@@ -1,0 +1,51 @@
+{% include  "header.html" %}
+{% if msg %}
+
+{% else %}
+    <h3 class="h3 h3Colors">User: {{ user_data.first_name }} {{ user_data.last_name }}</h3>
+    <div>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" class="centerTableCol">Label</th>
+                <th scope="col" class="centerTableCol">Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{ user_data.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Surname</td>
+                <td>{{ user_data.last_name }}</td>
+            </tr>
+            <tr>
+                <td>User Name</td>
+                <td>{{ user_data.username }}</td>
+            </tr>
+            <tr>
+                <td>email</td>
+                <td>{{ user_data.email }}</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td>{{ user_data.birthdate| date:"Y-m-d" }}</td>
+            </tr>
+            <tr>
+                <td>Random Number</td>
+                <td>{{ user_data.random_number }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <a href="/modify/{{ person.id }}">
+        <button type="submit" class="btn btn-warning">Modify Person!</button>
+    </a>
+    <a href="/delete_person/{{ person.id }}">
+        <button class="btn btn-danger">Delete Person!</button>
+    </a>
+{% endif %}
+{% include "footer.html" %}
