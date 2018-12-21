@@ -1,6 +1,6 @@
 {% include  "header.html" %}
 {% if msg %}
-
+    <div class="msgInfo">{{ msg }}</div>
 {% else %}
     <h3 class="h3 h3Colors">User: {{ user_data.first_name }} {{ user_data.last_name }}</h3>
     <div>
@@ -30,7 +30,13 @@
             </tr>
             <tr>
                 <td>Date of Birth</td>
-                <td>{{ user_data.birthdate| date:"Y-m-d" }}</td>
+                <td>
+                    {% if user.birthdate %}
+                        {{ user.birthdate| date:"Y-m-d" }}</td>
+                    {% else %}
+                        n/a
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <td>Random Number</td>
@@ -41,10 +47,10 @@
     </div>
 
     <hr>
-    <a href="/modify/{{ person.id }}">
+    <a href="/modify/{{ user_data.id }}">
         <button type="submit" class="btn btn-warning">Modify Person!</button>
     </a>
-    <a href="/delete_person/{{ person.id }}">
+    <a href="/delete_person/{{ user_data.id }}">
         <button class="btn btn-danger">Delete Person!</button>
     </a>
 {% endif %}

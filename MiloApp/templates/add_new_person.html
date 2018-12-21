@@ -1,0 +1,55 @@
+{% include  "header.html" %}
+
+{% if msg %}
+    <div class="msgInfo">{{ msg }}</div>
+{% else %}
+    <h3 class="h3 h3Colors">Add new User:</h3>
+    <div>
+        <form action="/new" method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                {% if errors %}
+                    {% for key, val in errors.items %}
+                        <p class="errorlist">{{ val }}</p>
+                    {% endfor %}
+                {% endif %}
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password_check.id_for_label }}">Conmfirm Password</label>
+                {{ form.password_check }}
+                {{ form.password_check.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                {{ form.first_name }}
+                {{ form.first_name.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">Surname</label>
+                {{ form.last_name }}
+                {{ form.last_name.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">email</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group">
+                <label for="id_birthdate">Date of Birth</label>
+                <input type="date" name="birthdate" min="1920-01-01">
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-primary">Add Person</button>
+        </form>
+    </div>
+
+{% endif %}
+{% include "footer.html" %}

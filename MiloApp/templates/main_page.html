@@ -21,7 +21,13 @@
         {% for user in users %}
             <tr>
                 <td class="centerTableCol"><a href="/show_person_details/{{ user.id }}">{{ user.username }}</a></td>
-                <td class="centerTableCol">{{ user.birthdate| date:"Y-m-d" }}</td>
+                <td class="centerTableCol">
+                    {% if user.birthdate %}
+                        {{ user.birthdate| date:"Y-m-d" }}</td>
+                    {% else %}
+                        n/a
+                    {% endif %}
+
                 <td class="centerTableCol">{{ user.age }}</td>
                 <td class="centerTableCol">
                     {% if user.age > 13 %}
@@ -30,6 +36,8 @@
                         blocked
                     {% endif %}
                 </td>
+
+
                 <td class="centerTableCol">{{ user.random_number }}</td>
                 <td class="centerTableCol">
                     {% if user.bizz == 3 %}
