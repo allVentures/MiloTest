@@ -119,6 +119,7 @@ class ModifyUser(View):
             password = form.cleaned_data["password"]
             password_check = form.cleaned_data["password_check"]
             birthdate = request.POST.get("birthdate")
+            print("BIRTHDATE:", birthdate)
             if birthdate == "":
                 birthdate = None
 
@@ -133,8 +134,8 @@ class ModifyUser(View):
                 person_to_modify.first_name=first_name
                 person_to_modify.last_name=last_name
                 person_to_modify.email=email
-                person_to_modify.password=password
                 person_to_modify.birthdate=birthdate
+                person_to_modify.set_password(password)
                 person_to_modify.save()
 
             except IntegrityError:
