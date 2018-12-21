@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MiloApp'
+    'MiloApp',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,3 +129,5 @@ STATIC_ROOT = 'MiloApp/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'MiloApp/media/'
+
+AUTH_USER_MODEL = 'MiloApp.User'

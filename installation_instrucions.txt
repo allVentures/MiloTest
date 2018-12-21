@@ -1,5 +1,7 @@
 1) create virtual env and activate it
+
 2) download repositoty to from github:
+git clone https://github.com/allVentures/MiloTest.git
 
 3) install requirments:
 pip3 install -r requirements.txt
@@ -9,6 +11,9 @@ SQL: create database milo;
 
 5) apply migrations:
 python3 manage.py migrate
+
+6) (optional) upload database dump
+psql -U [user_name] -W -f milodump.sql -h 127.0.0.1  milo
 
 6) start application
 python3 manage.py runserver
